@@ -1,0 +1,2 @@
+[03-Sep-2021 20:38:13 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.3.0". You are running 7.2.34. in /home/fecundit/crm.fecundit.com/vendor/composer/platform_check.php on line 24
+[20-Sep-2021 19:39:55 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 7.3.0". You are running 5.6.40. in /home/lgpcrmco/public_html/vendor/composer/platform_check.php on line 25
