@@ -115,8 +115,3 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     
     Route::get('api-options','Api\ApiController@options')->name('api-options');
 });
-
-
-
-
-Route::get('new-dev', [NewDevPageController::class, 'index'])->name('new-dev');
