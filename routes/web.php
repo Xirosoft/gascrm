@@ -1,14 +1,17 @@
 <?php
 
+use App\Http\Controllers\NewDevPageController;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 //Test Route::START
 Route::group(['prefix' => 'command'], function () {
     Route::get('clear', function () {
-        \Artisan::call('cache:clear');
-        \Artisan::call('config:clear');
-        \Artisan::call('route:clear');
-        \Artisan::call('view:clear');
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
         dd("All clear!");
     });
 
@@ -112,3 +115,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     
     Route::get('api-options','Api\ApiController@options')->name('api-options');
 });
+
+
+
+
+Route::get('new-dev', [NewDevPageController::class, 'index'])->name('new-dev');
