@@ -1,0 +1,23 @@
+name: Deploy via FTP Server
+
+on: workflow_dispatch
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+      - name: 📂 Sync files with Staging Server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ftp.rubelmahmud.com
+          username: u400406733.crm
+          password: sdJKHGYS*O&1
+          exclude: |
+            .env
+            vendor/
+            node_modules/
