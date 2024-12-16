@@ -1,316 +1,98 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="page-breadcrumb border-bottom">
+@include('partials.breadcrumb')
+
+<!-- State Summary -->
+<div class="state__summary">
     <div class="row">
-        <div class="col-lg-3 col-md-4 col-xs-12 align-self-center">
-            <h5 class="font-medium text-uppercase mb-0">{{ __('lang.Dashboard') }}</h5>
-        </div>
-        <div class="col-lg-9 col-md-8 col-xs-12 align-self-center">
-        </div>
-    </div>
-</div>
-
-<div class="page-content container-fluid">
-    <div class="row">
-        <div class="col-md-6 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-uppercase">New Leads</h5>
-                    <div class="d-flex align-items-center mb-2 mt-4">
-                        <h2 class="mb-0 display-5"><i class="icon-folder text-primary"></i></h2>
-                        <div class="ml-auto">
-                            <h2 class="mb-0 display-6"><span class="font-normal">{{ $newLeads }}</span></h2>
+        <div class="col-xxl-3 col-xl-3 col-sm-6">
+            <div class="stateBox">
+                <div class="stateBox__content">
+                    <h5 class="title">New Leads</h5>
+                    <div class="counter__value">{{ $newLeads }}</div>
+                    <div class="text__group">
+                        <div class="progres">
+                            <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.9992 0.666667C13.0055 0.620213 13.0055 0.57312 12.9992 0.526667C12.9934 0.487526 12.9822 0.449383 12.9659 0.413333C12.9483 0.380752 12.9282 0.349551 12.9059 0.32C12.8805 0.277835 12.8491 0.239646 12.8126 0.206667L12.7326 0.16C12.6941 0.131304 12.6513 0.10881 12.6059 0.0933333H12.4726C12.4319 0.0539967 12.3845 0.0223717 12.3326 0H8.99922C8.63103 0 8.33256 0.298477 8.33256 0.666667C8.33256 1.03486 8.63103 1.33333 8.99922 1.33333H10.8859L8.21922 4.47333L5.33922 2.76C5.05741 2.59239 4.69556 2.65458 4.48589 2.90667L1.15256 6.90667C1.03918 7.04272 0.984605 7.2183 1.00086 7.39465C1.01712 7.571 1.10288 7.73363 1.23922 7.84667C1.35916 7.94605 1.51012 8.0003 1.66589 8C1.86418 8.00032 2.05232 7.91236 2.17922 7.76L5.14589 4.2L7.99256 5.90667C8.27129 6.07199 8.62854 6.01292 8.83922 5.76667L11.6659 2.46667V4C11.6659 4.36819 11.9644 4.66667 12.3326 4.66667C12.7007 4.66667 12.9992 4.36819 12.9992 4V0.666667Z"
+                                    fill="#54D62C" />
+                            </svg>
                         </div>
+                        <div class="content"><span>+0.36%</span> than last week</div>
                     </div>
+                </div>
+                <div class="Minichart">
+                    <div id="mini_chart1"></div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-uppercase">All Leads</h5>
-                    <div class="d-flex align-items-center mb-2 mt-4">
-                        <h2 class="mb-0 display-5"><i class="icon-folder-alt text-danger"></i></h2>
-                        <div class="ml-auto">
-                            <h2 class="mb-0 display-6"><span class="font-normal">{{ $leadCounts }}</span></h2>
+        <div class="col-xxl-3 col-xl-3 col-sm-6">
+            <div class="stateBox">
+                <div class="stateBox__content">
+                    <h5 class="title">Total Leads</h5>
+                    <div class="counter__value">{{ $leadCounts }}</div>
+                    <div class="text__group">
+                        <div class="progres bg-danger">
+                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.0008 3.99999C12.0008 3.6318 11.7024 3.33333 11.3342 3.33333C10.966 3.33333 10.6675 3.6318 10.6675 3.99999V5.53333L7.84084 2.19999C7.63016 1.95374 7.27291 1.89467 6.99418 2.05999L4.14751 3.79999L1.18084 0.239993C1.02841 0.0565964 0.789714 -0.0315466 0.554671 0.00876633C0.319629 0.0490793 0.123947 0.211724 0.0413378 0.435433C-0.0412714 0.659142 0.00174203 0.90993 0.154175 1.09333L3.48751 5.09333C3.69718 5.34541 4.05903 5.4076 4.34084 5.23999L7.19418 3.52666L9.86084 6.66666H8.00084C7.63265 6.66666 7.33418 6.96514 7.33418 7.33333C7.33418 7.70152 7.63265 7.99999 8.00084 7.99999H11.3342C11.4162 7.99798 11.4974 7.9822 11.5742 7.95333L11.6675 7.89999C11.7023 7.88247 11.7357 7.86242 11.7675 7.83999C11.804 7.80701 11.8355 7.76882 11.8608 7.72666C11.8832 7.69711 11.9032 7.66591 11.9208 7.63333C11.9372 7.59728 11.9484 7.55913 11.9542 7.51999C11.9812 7.46122 11.997 7.39791 12.0008 7.33333V3.99999Z"
+                                    fill="#FF4842" />
+                            </svg>
                         </div>
+                        <div class="content"><span>-2.1%</span> than last week</div>
                     </div>
+                </div>
+                <div class="Minichart">
+                    <div id="mini_chart2"></div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-uppercase">All Accounts</h5>
-                    <div class="d-flex align-items-center mb-2 mt-4">
-                        <h2 class="mb-0 display-5"><i class="fas fa-sticky-note text-success"></i></h2>
-                        <div class="ml-auto">
-                            <h2 class="mb-0 display-6"><span class="font-normal">{{ $accountCounts }}</span></h2>
+        <div class="col-xxl-3 col-xl-3 col-sm-6">
+            <div class="stateBox">
+                <div class="stateBox__content">
+                    <h5 class="title">Total Accounts</h5>
+                    <div class="counter__value">{{ $accountCounts }}</div>
+                    <div class="text__group">
+                        <div class="progres">
+                            <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.9992 0.666667C13.0055 0.620213 13.0055 0.57312 12.9992 0.526667C12.9934 0.487526 12.9822 0.449383 12.9659 0.413333C12.9483 0.380752 12.9282 0.349551 12.9059 0.32C12.8805 0.277835 12.8491 0.239646 12.8126 0.206667L12.7326 0.16C12.6941 0.131304 12.6513 0.10881 12.6059 0.0933333H12.4726C12.4319 0.0539967 12.3845 0.0223717 12.3326 0H8.99922C8.63103 0 8.33256 0.298477 8.33256 0.666667C8.33256 1.03486 8.63103 1.33333 8.99922 1.33333H10.8859L8.21922 4.47333L5.33922 2.76C5.05741 2.59239 4.69556 2.65458 4.48589 2.90667L1.15256 6.90667C1.03918 7.04272 0.984605 7.2183 1.00086 7.39465C1.01712 7.571 1.10288 7.73363 1.23922 7.84667C1.35916 7.94605 1.51012 8.0003 1.66589 8C1.86418 8.00032 2.05232 7.91236 2.17922 7.76L5.14589 4.2L7.99256 5.90667C8.27129 6.07199 8.62854 6.01292 8.83922 5.76667L11.6659 2.46667V4C11.6659 4.36819 11.9644 4.66667 12.3326 4.66667C12.7007 4.66667 12.9992 4.36819 12.9992 4V0.666667Z"
+                                    fill="#54D62C" />
+                            </svg>
                         </div>
+                        <div class="content"><span>9.45%</span> than last week</div>
                     </div>
+                </div>
+                <div class="Minichart">
+                    <div id="mini_chart3"></div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-uppercase">All Contacts</h5>
-                    <div class="d-flex align-items-center mb-2 mt-4">
-                        <h2 class="mb-0 display-5"><i class="icon-people text-info"></i></h2>
-                        <div class="ml-auto">
-                            <h2 class="mb-0 display-6"><span class="font-normal">{{ $contactCounts }}</span></h2>
+        <div class="col-xxl-3 col-xl-3 col-sm-6">
+            <div class="stateBox">
+                <div class="stateBox__content">
+                    <h5 class="title">Total Contacts</h5>
+                    <div class="counter__value">{{ $contactCounts }}</div>
+                    <div class="text__group">
+                        <div class="progres bg-danger">
+                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.0008 3.99999C12.0008 3.6318 11.7024 3.33333 11.3342 3.33333C10.966 3.33333 10.6675 3.6318 10.6675 3.99999V5.53333L7.84084 2.19999C7.63016 1.95374 7.27291 1.89467 6.99418 2.05999L4.14751 3.79999L1.18084 0.239993C1.02841 0.0565964 0.789714 -0.0315466 0.554671 0.00876633C0.319629 0.0490793 0.123947 0.211724 0.0413378 0.435433C-0.0412714 0.659142 0.00174203 0.90993 0.154175 1.09333L3.48751 5.09333C3.69718 5.34541 4.05903 5.4076 4.34084 5.23999L7.19418 3.52666L9.86084 6.66666H8.00084C7.63265 6.66666 7.33418 6.96514 7.33418 7.33333C7.33418 7.70152 7.63265 7.99999 8.00084 7.99999H11.3342C11.4162 7.99798 11.4974 7.9822 11.5742 7.95333L11.6675 7.89999C11.7023 7.88247 11.7357 7.86242 11.7675 7.83999C11.804 7.80701 11.8355 7.76882 11.8608 7.72666C11.8832 7.69711 11.9032 7.66591 11.9208 7.63333C11.9372 7.59728 11.9484 7.55913 11.9542 7.51999C11.9812 7.46122 11.997 7.39791 12.0008 7.33333V3.99999Z"
+                                    fill="#FF4842" />
+                            </svg>
                         </div>
+                        <div class="content"><span>-5.09%</span> than last week</div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-uppercase">Leads</h5>
-                    <div id="morris-donut-chart" style="height:350px;"></div>
+                <div class="Minichart">
+                    <div id="mini_chart4"></div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-12 col-lg-4">
-            <div class="card">
-                <div class="d-flex align-items-center p-3">
-                    <h5 class="card-title mb-0 text-uppercase">Today's Tasks</h5>
-                </div>
-                <div class="p-3">
-                    <div class="table-responsive">
-                        <table class="table text-muted mb-0 no-wrap recent-table font-light">
-                            <thead>
-                                <tr class="text-uppercase">
-                                    <th class="border-0">{{ __('lang.Subject') }}</th>
-                                    <th class="border-0">{{ __('lang.RelatedTo') }}</th>
-                                    <th class="border-0">{{ __('lang.DueDate') }}</th>
-                                    <th class="border-0">{{ __('lang.Status') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if($tasks->count() > 0)
-                                @foreach($tasks as $val)
-                                <tr>
-                                    <td><a href="{{ route('task.show', $val->id) }}">{{ $val->subject }}</a></td>
-                                    <td>{{ $val->account != null ? $val->account->name : '' }}</td>
-                                    <td>{{ $val->due_date }}</td>
-                                    <td>{{ $val->status }}</td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td colspan="4" class="text-center p-5">{{ __('lang.NoTaskFound') }}</td>
-                                </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12 col-lg-4">
-            <div class="card">
-                <div class="d-flex align-items-center p-3">
-                    <h5 class="card-title mb-0 text-uppercase">Today's Events</h5>
-                </div>
-                <div class="p-3">
-                    <div class="table-responsive">
-                        <table class="table text-muted mb-0 no-wrap recent-table font-light">
-                            <thead>
-                                <tr class="text-uppercase">
-                                    <th class="border-0">{{ __('lang.EndDatetime') }}</th>
-                                    <th class="border-0">{{ __('lang.Subject') }}</th>
-                                    <th class="border-0">{{ __('lang.Name') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if($events->count() > 0)
-                                @foreach($events as $val)
-                                <tr>
-                                    <td>{{ dateFormat($val->end_date, 1) }}</td>
-                                    <td><a href="{{ route('event.show', $val->id) }}">{{ $val->subject }}</a></td>
-                                    <td>{{ $val->conatctable != null ? $val->conatctable->name : '' }}</td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td colspan="4" class="text-center p-5">{{ __('lang.NoEventFound') }}</td>
-                                </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12">
-            @if (isset($show))
-            <lead-details :data="{{ $data }}" :user="{{ Auth::user() }}" :permissions="{{ $permissions }}" :urls="{ 
-            options : '{{ route('api-options') }}',
-            lead : '{{ route('lead.index') }}',
-            printable : '{{ route('lead.printable', $data->id) }}',
-            store : '{{ route('lead.store') }}',
-            update : '{{ route('lead.update', $data->id) }}',
-            destroy : '{{ route('lead.destroy', $data->id) }}',
-            follow : '{{ route('lead.follow', $data->id) }}',
-            owner : '{{ route('lead.owner-change', $data->id) }}',
-            convert : '{{ route('lead.convert', $data->id) }}',
-            statusChange : '{{ route('lead.status-change') }}',
-            task : '{{ route('task.store') }}',
-            email : '{{ route('email.store') }}',
-            event : '{{ route('event.store') }}',
-            note : '{{ route('note.store') }}',
-            noteAll : '{{ route('note.all') }}',
-            file : '{{ route('file.store') }}',
-            fileAll : '{{ route('file.all') }}',
-        }"></lead-details>
-            @else
-            <div class="page-breadcrumb border-bottom">
-                <div class="row">
-                    <div class="col-lg-3 col-md-2 col-12 align-self-center">
-                        <h5 class="font-medium text-uppercase mb-0">{{ __('lang.Leads') }}</h5>
-                    </div>
-                    <div class="col-lg-9 col-md-10 col-12 align-self-center">
-
-                        <form method="GET" action="{{ route('lead.index') }}" class="search-form">
-                            <div class="form-group mx-md-2 mb-2">
-                                <select class="form-control input-outline-secondary" name="status">
-                                    <option value="">{{ __('lang.AnyStatus') }}</option>
-                                    @foreach($leadStatus as $sts)
-                                    <option value="{{ $sts->id }}" {{ (Request::get('status') == $sts->id) ? 'selected' : '' }}>{{ $sts->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group mx-md-2 mb-2">
-                                <input type="text" class="form-control input-outline-secondary" name="q" value="{{ Request::get('q') }}" placeholder="{{ __('lang.InputSearchText') }}">
-                            </div>
-
-                            <div class="btn-group mb-2">
-                                <button type="submit" class="btn btn-secondary"><i class="fa fa-search"></i> {{ __('lang.Search') }}</button>
-                                <a href="{{ route('lead.index') }}" class="btn btn-secondary"><i class="fa fa-times"></i></a>
-                                @can('add lead')
-                                <a class="btn btn-secondary ml-2" href="javascript:void(0);" @click="$refs.childref.addModal('{{ route('lead.store').qString() }}')"><i class="fa fa-plus"></i></a>
-                                @endcan
-
-                                @can('edit lead')
-                                <div class="btn-group ml-2">
-                                    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-display="static"></button>
-                                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-lg-right">
-                                        <a class="dropdown-item" href="javascript:void(0)" onclick="colCheckAction('Active')">{{ __('lang.ActiveAll') }}</a>
-                                        <a class="dropdown-item" href="javascript:void(0)" onclick="colCheckAction('Deactivated')">{{ __('lang.DeactivateAll') }}</a>
-                                        @can('delete lead')
-                                        <a class="dropdown-item" href="javascript:void(0)" onclick="colCheckAction('Delete')">{{ __('lang.DeleteAll') }}</a>
-                                        @endcan
-                                    </div>
-                                </div>
-                                @endcan
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="page-content container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped dataTable">
-                                <thead>
-                                    <tr>
-                                        <th class="chk-col"><input type="checkbox" id="col-checkbox-main" onclick="colCheckAll()"></th>
-                                        <th>{{ __('lang.Name') }}</th>
-                                        <th>{{ __('lang.Title') }}</th>
-                                        <th>{{ __('lang.Company') }}</th>
-                                        <th>{{ __('lang.Mobile') }}</th>
-                                        <th>{{ __('lang.Email') }}</th>
-                                        <th>{{ __('lang.LeadStatus') }}</th>
-                                        <th>{{ __('lang.LeadOwner') }}</th>
-                                        <th class="col-action"></th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    @if($records->count() > 0)
-                                    @foreach($records as $val)
-                                    <tr>
-                                        <td><input type="checkbox" class="col-checkbox-all" value="{{ $val->id }}"></td>
-                                        <td><a href="{{ route('lead.show', $val->id) }}">{{ $val->name }}</a></td>
-                                        <td>{{ $val->title }}</td>
-                                        <td>{{ $val->company }}</td>
-                                        <td>{{ $val->mobile }}</td>
-                                        <td>{{ $val->email }}</td>
-                                        <td>{{ $val->lead_status != null ? $val->lead_status->name : '-' }}</td>
-                                        <td>{{ $val->owner != null ? $val->owner->name : '-' }}</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" data-display="static"></button>
-                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-lg-right">
-                                                    @can('details lead')
-                                                    <a class="dropdown-item" href="{{ route('lead.show', $val->id) }}">{{ __('lang.Details') }}</a>
-                                                    @endcan
-
-                                                    @can('edit lead')
-                                                    <a class="dropdown-item" href="javascript:void(0)" @click="$refs.childref.editModal({{ $val }}, '{{ route('lead.update', $val->id) }}')">{{ __('lang.Edit') }}</a>
-                                                    @endcan
-
-                                                    @can('delete lead')
-                                                    <a class="dropdown-item" href="javascript:void(0)" onclick="deleted('{{ route('lead.destroy', $val->id).qString() }}')">{{ __('lang.Delete') }}</a>
-                                                    @endcan
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-4 pagi-msg">{!! pagiMsg($records) !!}</div>
-
-                            <div class="col-sm-4 text-center">
-                                {{ $records->appends(Request::except('page'))->links() }}
-                            </div>
-
-                            <div class="col-sm-4">
-                                <div class="d-flex justify-content-center justify-content-sm-end">
-                                    <div class="input-group pagi-limit-box">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">{{ __('lang.Show:') }} </span>
-                                        </div>
-
-                                        <select class="form-control pagi-limit" name="limit">
-                                            @foreach(paginations() as $pag)
-                                            <option value="{{ qUrl(['limit' => $pag]) }}" {{ ($pag == Request::get('limit')) ? 'selected' : '' }}>{{ $pag }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Store/Update Modal -->
-            @if(auth()->user()->can('add lead') || auth()->user()->can('edit lead'))
-            <lead-form ref="childref" page="{{ Request::routeIs('lead.create') ? 'create' : 'index' }}" :user="{{ Auth::user() }}" :urls="{ 
-            options : '{{ route('api-options') }}', 
-            lead : '{{ route('lead.index') }}', 
-            store : '{{ route('lead.store') }}'
-        }"></lead-form>
-            @endif
-            @endif
         </div>
     </div>
 </div>

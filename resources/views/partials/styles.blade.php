@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/jquery.fancybox.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/nice-select.css') }}">
+<link rel="stylesheet" href="{{ asset('css/jquery.rprogessbar.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/apexcharts.css') }}">
+<link rel="stylesheet" href="{{ asset('css/jquery.countdown.css') }}">
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">

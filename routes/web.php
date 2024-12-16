@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\NewDevPageController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,7 @@ Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name
 Auth::routes(['verify' => true]);
 
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth', 'verified']], function () {    
-    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('profile', 'ProfileController@index')->name('profile');
     Route::post('profile', 'ProfileController@update');
