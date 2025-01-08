@@ -16,12 +16,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'image', 'mobile', 'email', 'password', 'type', 'status', 'email_signature', 'created_by', 'updated_by',
     ];
-    
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
-    
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -39,5 +39,34 @@ class User extends Authenticatable
     public function tapActivity(Activity $activity)
     {
         $activity->ip = \request()->ip();
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'user_id');
+    }
+    public function leads()
+    {
+        return $this->hasMany(Lead::class, 'owner_id');
+    }
+    public function accounts()
+    {
+        return $this->hasMany(Account::class, 'owner_id');
+    }
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class, 'owner_id');
+    }
+    public function followings()
+    {
+        return $this->hasMany(Follow::class, 'user_id');
+    }
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'user_id');
+    }
+    public function notifications()
+    {
+        return $this->hasMany(UserNotification::class, 'user_id');
     }
 }
